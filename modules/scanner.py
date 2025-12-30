@@ -29,7 +29,7 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox):
                 misc_textbox.insert("end", f"[>] Port {port} ... FILTERED/NO RESPONSE\n")
                 misc_textbox.see("end")
             logs_textbox.see("end")
-        except:
+        finally:
             s.close()
 
 
