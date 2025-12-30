@@ -1,5 +1,5 @@
 from customtkinter import *
-from modules.scanner import scan
+from modules.scanner import scan, start_scan
 
 def start_ui():
     app = CTk()
@@ -9,9 +9,6 @@ def start_ui():
 
     address_input = CTkEntry(app, placeholder_text = "Target IP address", font = ("TkTextFont", 15), text_color = "white", width = 200)
     address_input.place(x = 10, y = 10)
-
-    scan_button = CTkButton(app, text = "Scan", fg_color = "#6398ba", width = 100, command = lambda: scan(address_input.get()))
-    scan_button.place(x = 220, y = 10)
 
     closed_textbox = CTkTextbox(app, font = ("TkTextFont", 15), text_color = "white", width = 285, height = 250)
     closed_textbox.place(x = 10, y = 100)
@@ -24,5 +21,8 @@ def start_ui():
 
     logs_textbox = CTkTextbox(app, font = ("TkTextFont", 15), text_color = "white", width = 875, height = 250)
     logs_textbox.place(x = 10, y = 380)
-    
+
+    scan_button = CTkButton(app, text = "Scan", fg_color = "#6398ba", width = 100, command = lambda: start_scan(address_input.get(), logs_textbox, closed_textbox, open_textbox, misc_textbox))
+    scan_button.place(x = 220, y = 10)
+
     app.mainloop()
