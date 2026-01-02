@@ -10,13 +10,13 @@ def start_ui():
     address_input = CTkEntry(app, placeholder_text = "Target IP address", font = ("TkTextFont", 15), text_color = "white", width = 200)
     address_input.place(x = 10, y = 10)
 
-    closed_textbox = CTkTextbox(app, font = ("TkTextFont", 15), text_color = "white", width = 285, height = 250)
+    closed_textbox = CTkTextbox(app, font = ("TkTextFont", 15), width = 285, height = 250, text_color = "red")
     closed_textbox.place(x = 10, y = 100)
 
-    open_textbox = CTkTextbox(app, font = ("TkTextFont", 15), text_color = "white", width = 285, height = 250)
+    open_textbox = CTkTextbox(app, font = ("TkTextFont", 15), width = 285, height = 250, text_color = "green")
     open_textbox.place(x = 305, y = 100)
 
-    misc_textbox = CTkTextbox(app, font = ("TkTextFont", 15), text_color = "white", width = 285, height = 250)
+    misc_textbox = CTkTextbox(app, font = ("TkTextFont", 15), width = 285, height = 250, text_color = "orange")
     misc_textbox.place(x = 600, y = 100)
 
     logs_textbox = CTkTextbox(app, font = ("TkTextFont", 15), text_color = "white", width = 875, height = 250)
