@@ -25,4 +25,16 @@ def start_ui():
     scan_button = CTkButton(app, text = "Scan", fg_color = "#6398ba", width = 100, command = lambda: start_scan(address_input.get(), logs_textbox, closed_textbox, open_textbox, misc_textbox))
     scan_button.place(x = 220, y = 10)
 
+    range_label = CTkLabel(app, text = "Port range:", font = ("TkTextFont", 15), text_color = "white")
+    range_label.place(x = 630, y = 10)
+
+    first_entry = CTkEntry(app, font = ("TkTextFont", 15), text_color = "white", width = 70)
+    first_entry.place(x = 720, y = 10)
+
+    minus_label = CTkLabel(app, text = "-", font = ("TkTextFont", 15), text_color = "white")
+    minus_label.place(x = 800, y = 10)
+
+    second_entry = CTkEntry(app, font = ("TkTextFont", 15), text_color = "white", width = 70)
+    second_entry.place(x = 815, y = 10)
+
     app.mainloop()
