@@ -13,29 +13,29 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox):
         try:
             result = s.connect_ex((address, port))
             if result == 0:
-                logs_textbox.insert("end", f"[>] Port {port} ... OPEN\n")
+                status = "OPEN"
                 open_textbox.insert("end", f"[>] Port {port} ... OPEN\n")
-                open_textbox.configure(text_color = "green")
-                open_textbox.see("end")
 
-            elif result == 111:
-                logs_textbox.insert("end", f"[>] Port {port} ... CLOSED\n")
+            elif result in (111, 10061):
+                status = "CLOSED"
                 closed_textbox.insert("end", f"[>] Port {port} ... CLOSED\n")
-                closed_textbox.configure(text_color = "red")
-                closed_textbox.see("end")
 
-            elif result in (110, 11):
-                logs_textbox.insert("end", f"[>] Port {port} ... FILTERED / NO RESPONSE\n")
-                misc_textbox.insert("end", f"[>] Port {port} ... FILTERED / NO RESPONSE\n")
-                misc_textbox.configure(text_color = "orange")
-                misc_textbox.see("end")
-
+            elif result in (110, 10060):
+                status = "FILTERED / TIMEOUT"
+                misc_textbox.insert("end", f"[>] Port {port} ... FILTERED / TIMEOUT\n")
+            
+            elif result in (11, 10035):
+                status = "NO RESPONSE"
+                misc_textbox.insert("end", f"[>] Port {port} ... NO RESPONSE\n")
             else:
-                logs_textbox.insert("end", f"[>] Port {port} ... ERROR\n")
-                misc_textbox.insert("end", f"[>] Port {port} ... FILTERED / NO RESPONSE\n")
-                misc_textbox.see("end")
-
+                status = "ERROR"
+                misc_textbox.insert("end", f"[>] Port {port} ... ERROR\n")
+            
+            logs_textbox.insert("end", f"[>] Port {port} ... {status}\n" )
             logs_textbox.see("end")
+            open_textbox.see("end")
+            closed_textbox.see("end")
+            misc_textbox.see("end")
         finally:
             s.close()
 
