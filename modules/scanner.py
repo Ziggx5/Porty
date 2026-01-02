@@ -15,19 +15,26 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox):
             if result == 0:
                 logs_textbox.insert("end", f"[>] Port {port} ... OPEN\n")
                 open_textbox.insert("end", f"[>] Port {port} ... OPEN\n")
+                open_textbox.configure(text_color = "green")
                 open_textbox.see("end")
+
             elif result == 111:
                 logs_textbox.insert("end", f"[>] Port {port} ... CLOSED\n")
                 closed_textbox.insert("end", f"[>] Port {port} ... CLOSED\n")
+                closed_textbox.configure(text_color = "red")
                 closed_textbox.see("end")
+
             elif result in (110, 11):
-                logs_textbox.insert("end", f"[>] Port {port} ... FILTERED/NO RESPONSE\n")
-                misc_textbox.insert("end", f"[>] Port {port} ... FILTERED/NO RESPONSE\n")
+                logs_textbox.insert("end", f"[>] Port {port} ... FILTERED / NO RESPONSE\n")
+                misc_textbox.insert("end", f"[>] Port {port} ... FILTERED / NO RESPONSE\n")
+                misc_textbox.configure(text_color = "orange")
                 misc_textbox.see("end")
+
             else:
                 logs_textbox.insert("end", f"[>] Port {port} ... ERROR\n")
-                misc_textbox.insert("end", f"[>] Port {port} ... FILTERED/NO RESPONSE\n")
+                misc_textbox.insert("end", f"[>] Port {port} ... FILTERED / NO RESPONSE\n")
                 misc_textbox.see("end")
+
             logs_textbox.see("end")
         finally:
             s.close()
