@@ -34,7 +34,11 @@ def start_ui():
     second_entry = CTkEntry(app, placeholder_text = "65535", font = ("TkTextFont", 15), text_color = "white", width = 70)
     second_entry.place(x = 815, y = 10)
 
-    scan_button = CTkButton(app, text = "Scan", fg_color = "#6398ba", width = 100, command = lambda: start_scan(address_input.get(), logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry.get(), second_entry.get()))
+    progress_bar = CTkProgressBar(app, width = 310)
+    progress_bar.place(x = 10, y = 60)
+    progress_bar.set(0)
+
+    scan_button = CTkButton(app, text = "Scan", fg_color = "#6398ba", width = 100, command = lambda: start_scan(address_input.get(), logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry.get(), second_entry.get(), progress_bar))
     scan_button.place(x = 220, y = 10)
 
     app.mainloop()
