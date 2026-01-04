@@ -1,13 +1,15 @@
 import socket
 import threading
 
-def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar):
-    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar,))
+def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar, stop_event):
+    stop_event.clear()
+    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar, stop_event,))
     thread.start()
 
-def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar):
+def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar, stop_event):
     first = int(first_entry)
     second = int(second_entry)
+
     if first < 1 or second > 65535 or first > second:
         logs_textbox.insert("end", "[!] Invalid port range\n")
         return
@@ -21,8 +23,10 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, firs
     scanned_ports = 0
 
     for port in range(first, second + 1):
+        if stop_event.is_set():
+            logs_textbox.insert("end", "[!] Scan stopped by user\n")
+            break
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        print(s)
         s.settimeout(0.1)
 
         try:

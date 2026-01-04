@@ -1,11 +1,13 @@
 from customtkinter import *
 from modules.scanner import scan, start_scan
+import threading
 
 def start_ui():
     app = CTk()
     app.geometry("895x700")
     app.title("Porty")
     app.resizable(False, False)
+    stop_event = threading.Event()
 
     address_input = CTkEntry(app, placeholder_text = "Target IP address", font = ("TkTextFont", 15), text_color = "white", width = 200)
     address_input.place(x = 10, y = 10)
@@ -38,7 +40,10 @@ def start_ui():
     progress_bar.place(x = 10, y = 60)
     progress_bar.set(0)
 
-    scan_button = CTkButton(app, text = "Scan", fg_color = "#6398ba", width = 100, command = lambda: start_scan(address_input.get(), logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry.get(), second_entry.get(), progress_bar))
+    stop_button = CTkButton(app, text = "Stop", fg_color = "#fc2d2d", width = 100, height = 30, hover_color = "#7d1515", command = lambda: stop_event.set())
+    stop_button.place(x = 330, y = 10)
+
+    scan_button = CTkButton(app, text = "Scan", fg_color = "#0673bd", hover_color = "#033e66", width = 100, height = 30, command = lambda: start_scan(address_input.get(), logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry.get(), second_entry.get(), progress_bar, stop_event))
     scan_button.place(x = 220, y = 10)
 
     app.mainloop()
