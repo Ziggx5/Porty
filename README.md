@@ -35,8 +35,10 @@ Linux:
 - Go to releases
 - Download latest `.AppImage`
 - Make it executable and run:
-  `chmod +x Porty-x86_64.AppImage
-  ./Porty-x86_64.AppImage`
+
+  `chmod +x Porty-x86_64.AppImage`
+
+  `./Porty-x86_64.AppImage`
 
 
 
