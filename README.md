@@ -8,7 +8,7 @@ This software is provided for educational and research purposes only.
 Use it only on systems you own or have permission to test.
 The author is not responsible for any misuse or damage caused by this application.
 
-<img width="925" height="753" alt="image" src="https://github.com/user-attachments/assets/7b9d0b13-34ca-4a94-a209-ed5b4b9bc285" />
+<img width="1025" height="858" alt="image" src="https://github.com/user-attachments/assets/5648b691-58a8-4c1d-8fe0-7f0cd00b2066" />
 
 ---
 ✨ Features
@@ -42,8 +42,9 @@ Linux:
 
 📄 License
 
-This project is licensed under the GPL-3.0 License. Copyright © 2025 Maj Sedonja
+This project is licensed under the GPL-3.0 License. Copyright © 2025 Ziggx5
 
 👤 Author
 
-Maj Sedonja Github: https://github.com/Ziggx5
+Ziggx5 
+Github: https://github.com/Ziggx5
