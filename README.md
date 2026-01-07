@@ -42,7 +42,9 @@ Linux:
 
 📄 License
 
-This project is licensed under the GPL-3.0 License. Copyright © 2025 Ziggx5
+This project is licensed under the GPL-3.0 License.
+
+Copyright © 2025 Ziggx5
 
 👤 Author
 
