@@ -2,12 +2,12 @@ import socket
 import threading
 from modules.scan_rate import rate
 
-def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input):
+def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label):
     stop_event.clear()
-    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input))
+    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label,))
     thread.start()
 
-def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input):
+def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label):
     first = int(first_entry)
     second = int(second_entry)
 
@@ -60,6 +60,7 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, firs
             scanned_ports += 1
             progress = scanned_ports / total_ports
             progress_bar.set(progress)
+            percentage_label.configure(text = f"{int(progress * 100)}%")
         finally:
             s.close()
 

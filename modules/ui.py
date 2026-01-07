@@ -36,9 +36,11 @@ def start_ui():
     second_entry = CTkEntry(app, placeholder_text = "65535", font = ("TkTextFont", 15), text_color = "white", width = 70)
     second_entry.place(x = 815, y = 10)
 
-    progress_bar = CTkProgressBar(app, width = 310)
+    progress_bar = CTkProgressBar(app, width = 310, progress_color = "green")
     progress_bar.place(x = 10, y = 60)
     progress_bar.set(0)
+    percentage_label = CTkLabel(app, text = "0%", font = ("TkTextFont", 15), text_color = "white")
+    percentage_label.place(x = 330, y = 50)
 
     stop_button = CTkButton(app, text = "Stop", fg_color = "#fc2d2d", width = 100, height = 30, hover_color = "#7d1515", command = lambda: stop_event.set())
     stop_button.place(x = 330, y = 10)
@@ -52,7 +54,7 @@ def start_ui():
     second_label = CTkLabel(app, text = "s", font = ("TkTextFont", 15), text_color = "white")
     second_label.place(x = 800, y = 50)
 
-    scan_button = CTkButton(app, text = "Scan", fg_color = "#0673bd", hover_color = "#033e66", width = 100, height = 30, command = lambda: start_scan(address_input.get(), logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry.get(), second_entry.get(), progress_bar, stop_event, rate_input.get()))
+    scan_button = CTkButton(app, text = "Scan", fg_color = "#0673bd", hover_color = "#033e66", width = 100, height = 30, command = lambda: start_scan(address_input.get(), logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry.get(), second_entry.get(), progress_bar, stop_event, rate_input.get(), percentage_label))
     scan_button.place(x = 220, y = 10)
 
     app.mainloop()
