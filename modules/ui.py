@@ -12,16 +12,16 @@ def start_ui():
     address_input = CTkEntry(app, placeholder_text = "Target IP address", font = ("TkTextFont", 15), text_color = "white", width = 200)
     address_input.place(x = 10, y = 10)
 
-    closed_textbox = CTkTextbox(app, font = ("TkTextFont", 15), width = 285, height = 250, text_color = "red")
+    closed_textbox = CTkTextbox(app, font = ("TkTextFont", 15), width = 285, height = 250, text_color = "#E06C75", padx = 5, pady = 5)
     closed_textbox.place(x = 10, y = 100)
 
-    open_textbox = CTkTextbox(app, font = ("TkTextFont", 15), width = 285, height = 250, text_color = "green")
+    open_textbox = CTkTextbox(app, font = ("TkTextFont", 15), width = 285, height = 250, text_color = "#98C379", padx = 5, pady = 5)
     open_textbox.place(x = 305, y = 100)
 
-    misc_textbox = CTkTextbox(app, font = ("TkTextFont", 15), width = 285, height = 250, text_color = "orange")
+    misc_textbox = CTkTextbox(app, font = ("TkTextFont", 15), width = 285, height = 250, text_color = "#E5C07B", padx = 5, pady = 5)
     misc_textbox.place(x = 600, y = 100)
 
-    logs_textbox = CTkTextbox(app, font = ("TkTextFont", 15), text_color = "white", width = 875, height = 250)
+    logs_textbox = CTkTextbox(app, font = ("TkTextFont", 15), text_color = "white", width = 875, height = 250, padx = 5, pady = 5)
     logs_textbox.place(x = 10, y = 380)
 
     range_label = CTkLabel(app, text = "Port range:", font = ("TkTextFont", 15), text_color = "white")
