@@ -8,17 +8,24 @@ def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox
     thread.start()
 
 def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label):
+    open_textbox.delete(0.0, "end")
+    closed_textbox.delete(0.0, "end")
+    misc_textbox.delete(0.0, "end")
+    logs_textbox.delete(0.0, "end")
+    
+    try:
+        resolved_ip = socket.gethostbyname(address)
+        logs_textbox.insert("end", f"[*] Target resolved {address} => {resolved_ip}\n")
+    except socket.gaierror:
+        logs_textbox.insert("end", f"[!] Invalid IP or hostname: {address}\n")
+        return
+
     first = int(first_entry)
     second = int(second_entry)
 
     if first < 1 or second > 65535 or first > second:
         logs_textbox.insert("end", "[!] Invalid port range\n")
         return
-    
-    open_textbox.delete(0.0, "end")
-    closed_textbox.delete(0.0, "end")
-    misc_textbox.delete(0.0, "end")
-    logs_textbox.delete(0.0, "end")
 
     total_ports = second - first + 1
     scanned_ports = 0
@@ -31,7 +38,7 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, firs
         s.settimeout(rate(rate_input))
 
         try:
-            result = s.connect_ex((address, port))
+            result = s.connect_ex((resolved_ip, port))
             if result == 0:
                 status = "OPEN"
                 open_textbox.insert("end", f"[>] Port {port} ... OPEN\n")
