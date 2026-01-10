@@ -41,7 +41,16 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, firs
             result = s.connect_ex((resolved_ip, port))
             if result == 0:
                 status = "OPEN"
-                open_textbox.insert("end", f"[>] Port {port} ... OPEN\n")
+                try:
+                    banner = s.recv(1024)
+                    if banner:
+                        decoded_banner = banner.decode(errors = "ignore").strip()
+                except socket.timeout:
+                    decoded_banner = "(No banner)"
+                except Exception as e:
+                    decoded_banner = f"(Banner error: {e})"
+
+                open_textbox.insert("end", f"[>] Port {port} ... OPEN {decoded_banner}\n")
 
             elif result in (111, 10061):
                 status = "CLOSED"
@@ -49,6 +58,7 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, firs
 
             elif result in (110, 10060):
                 status = "FILTERED / TIMEOUT"
+
                 misc_textbox.insert("end", f"[>] Port {port} ... FILTERED / TIMEOUT\n")
             
             elif result in (11, 10035):
