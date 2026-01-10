@@ -8,7 +8,7 @@ This software is provided for educational and research purposes only.
 Use it only on systems you own or have permission to test.
 The author is not responsible for any misuse or damage caused by this application.
 
-<img width="1025" height="858" alt="image" src="https://github.com/user-attachments/assets/5648b691-58a8-4c1d-8fe0-7f0cd00b2066" />
+<img width="1055" height="858" alt="image" src="https://github.com/user-attachments/assets/cd79ccd9-12a6-4125-af1b-40556477ecb1" />
 
 ---
 ✨ Features
@@ -16,6 +16,7 @@ The author is not responsible for any misuse or damage caused by this applicatio
 - Port sorting (open, closed, filtered/timeout, no response)
 - Real-time scan logs
 - Simple graphical interface
+- Adjustable port scan range and scan rate
 ---
 
 🚀 Installation
@@ -52,3 +53,7 @@ Copyright © 2025 Ziggx5
 
 Ziggx5 
 Github: https://github.com/Ziggx5
+
+Discord: ziggx
+
+If you enjoy this project, consider giving the repository a ⭐
