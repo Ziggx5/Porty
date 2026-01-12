@@ -109,7 +109,6 @@ def start_ui():
     )
     filtered_textbox.grid(row = 1, column = 0, padx = 5, pady = 5)
 
-
     logs_label = CTkLabel(
         logs_frame,
         text = "Logs",
@@ -183,10 +182,10 @@ def start_ui():
     stop_button = CTkButton(
         app,
         text = "Stop",
-        fg_color = "#fc2d2d",
+        fg_color = "#751414",
         width = 100,
         height = 30,
-        hover_color = "#7d1515",
+        state = "disabled",
         command = lambda: stop_event.set()
     )
     stop_button.place(x = 330, y = 10)
@@ -223,7 +222,22 @@ def start_ui():
         hover_color = "#033e66",
         width = 100,
         height = 30,
-        command = lambda: start_scan(address_input.get(), logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry.get(), second_entry.get(), progress_bar, stop_event, rate_input.get(), percentage_label)
+        command = lambda: start_scan(
+            address_input.get(),
+            logs_textbox,
+            closed_textbox,
+            open_textbox,
+            misc_textbox,
+            filtered_textbox,
+            first_entry.get(),
+            second_entry.get(),
+            progress_bar,
+            stop_event,
+            rate_input.get(),
+            percentage_label,
+            stop_button,
+            scan_button
+            )
     )
     scan_button.place(x = 220, y = 10)
 

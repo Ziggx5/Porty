@@ -3,12 +3,12 @@ import threading
 from modules.scan_rate import rate
 import time
 
-def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label):
+def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button):
     stop_event.clear()
-    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label,))
+    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button,))
     thread.start()
 
-def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label):
+def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button):
     open_textbox.delete(0.0, "end")
     closed_textbox.delete(0.0, "end")
     misc_textbox.delete(0.0, "end")
@@ -30,9 +30,13 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
 
     total_ports = second - first + 1
     scanned_ports = 0
+    stop_button.configure(state = "normal", fg_color = "#fc2d2d", hover_color = "#7d1515")
+    scan_button.configure(state = "disabled", fg_color = "#04314f")
 
     for port in range(first, second + 1):
         if stop_event.is_set():
+            stop_button.configure(state = "disabled", fg_color = "#751414")
+            scan_button.configure(state = "normal", fg_color = "#0673bd", hover_color = "#033e66")
             logs_textbox.insert("end", "[!] Scan stopped by user\n")
             break
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
