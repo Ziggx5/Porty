@@ -4,7 +4,7 @@ import threading
 
 def start_ui():
     app = CTk()
-    app.geometry("925x700")
+    app.geometry("1120x700")
     app.title("Porty")
     app.resizable(False, False)
     stop_event = threading.Event()
@@ -16,10 +16,10 @@ def start_ui():
     closed_frame.place(x = 10, y = 100)
 
     open_frame = CTkFrame(app)
-    open_frame.place(x = 315, y = 100)
+    open_frame.place(x = 380, y = 100)
 
     misc_frame = CTkFrame(app)
-    misc_frame.place(x = 620, y = 100)
+    misc_frame.place(x = 750, y = 100)
 
     address_input = CTkEntry(
         app,
@@ -41,7 +41,7 @@ def start_ui():
     closed_textbox = CTkTextbox(
         closed_frame,
         font = ("TkTextFont", 15),
-        width = 285,
+        width = 350,
         height = 250,
         text_color = "#E06C75",
         padx = 5,
@@ -60,7 +60,7 @@ def start_ui():
     open_textbox = CTkTextbox(
         open_frame,
         font = ("TkTextFont", 15),
-        width = 285,
+        width = 350,
         height = 250,
         text_color = "#98C379",
         padx = 5,
@@ -79,7 +79,7 @@ def start_ui():
     misc_textbox = CTkTextbox(
         misc_frame,
         font = ("TkTextFont", 15),
-        width = 285,
+        width = 350,
         height = 250,
         text_color = "#E5C07B",
         padx = 5,
@@ -100,7 +100,7 @@ def start_ui():
         logs_frame,
         font = ("TkTextFont", 15),
         text_color = "white",
-        width = 895,
+        width = 1090,
         height = 250,
         padx = 5,
         pady = 5
@@ -113,7 +113,7 @@ def start_ui():
         font = ("TkTextFont", 15),
         text_color = "white"
     )
-    range_label.place(x = 660, y = 10)
+    range_label.place(x = 855, y = 10)
 
     first_entry = CTkEntry(
         app,
@@ -122,7 +122,7 @@ def start_ui():
         text_color = "white",
         width = 70
     )
-    first_entry.place(x = 750, y = 10)
+    first_entry.place(x = 945, y = 10)
 
     minus_label = CTkLabel(
         app,
@@ -130,7 +130,7 @@ def start_ui():
         font = ("TkTextFont", 15),
         text_color = "white"
     )
-    minus_label.place(x = 830, y = 10)
+    minus_label.place(x = 1025, y = 10)
 
     second_entry = CTkEntry(
         app,
@@ -139,7 +139,7 @@ def start_ui():
         text_color = "white",
         width = 70
     )
-    second_entry.place(x = 845, y = 10)
+    second_entry.place(x = 1040, y = 10)
 
     progress_bar = CTkProgressBar(
         app,
@@ -174,7 +174,7 @@ def start_ui():
         font = ("TkTextFont", 15),
         text_color = "white"
     )
-    scan_rate_label.place(x = 660, y = 50)
+    scan_rate_label.place(x = 855, y = 50)
 
     rate_input = CTkEntry(
         app,
@@ -183,7 +183,7 @@ def start_ui():
         text_color = "white",
         width = 70
     )
-    rate_input.place(x = 750, y = 50)
+    rate_input.place(x = 945, y = 50)
 
     second_label = CTkLabel(
         app,
@@ -191,7 +191,7 @@ def start_ui():
         font = ("TkTextFont", 15),
         text_color = "white"
     )
-    second_label.place(x = 830, y = 50)
+    second_label.place(x = 1025, y = 50)
 
     scan_button = CTkButton(
         app,

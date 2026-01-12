@@ -1,6 +1,7 @@
 import socket
 import threading
 from modules.scan_rate import rate
+import time
 
 def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label):
     stop_event.clear()
@@ -38,7 +39,13 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, firs
         s.settimeout(rate(rate_input))
 
         try:
+            start_time = time.perf_counter()
             result = s.connect_ex((resolved_ip, port))
+            end_time = time.perf_counter()
+
+            calculated_time = end_time - start_time
+            tcp_handshake_time = int(calculated_time * 1000)
+
             if result == 0:
                 status = "OPEN"
                 try:
@@ -50,25 +57,25 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, firs
                 except Exception as e:
                     decoded_banner = f"(Banner error: {e})"
 
-                open_textbox.insert("end", f"[>] Port {port} ... OPEN {decoded_banner}\n")
+                open_textbox.insert("end", f"[+] Port {port} | OPEN | RTT {tcp_handshake_time}ms\n")
 
             elif result in (111, 10061):
                 status = "CLOSED"
-                closed_textbox.insert("end", f"[>] Port {port} ... CLOSED\n")
+                closed_textbox.insert("end", f"[-] Port {port} | CLOSED | RTT {tcp_handshake_time}ms\n")
 
             elif result in (110, 10060):
                 status = "FILTERED / TIMEOUT"
 
-                misc_textbox.insert("end", f"[>] Port {port} ... FILTERED / TIMEOUT\n")
+                misc_textbox.insert("end", f"[?] Port {port} ... FILTERED / TIMEOUT | no reply\n")
             
             elif result in (11, 10035):
                 status = "NO RESPONSE"
-                misc_textbox.insert("end", f"[>] Port {port} ... NO RESPONSE\n")
+                misc_textbox.insert("end", f"[?] Port {port} ... NO RESPONSE | no reply\n")
             else:
                 status = "ERROR"
-                misc_textbox.insert("end", f"[>] Port {port} ... ERROR\n")
+                logs_textbox.insert("end", f"[!] Port {port} ... ERROR\n")
             
-            logs_textbox.insert("end", f"[>] Port {port} ... {status}\n" )
+            logs_textbox.insert("end", f"[>] Scanning: Port {port}\n")
             logs_textbox.see("end")
             open_textbox.see("end")
             closed_textbox.see("end")
