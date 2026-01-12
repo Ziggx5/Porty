@@ -3,12 +3,12 @@ import threading
 from modules.scan_rate import rate
 import time
 
-def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label):
+def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label):
     stop_event.clear()
-    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label,))
+    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label,))
     thread.start()
 
-def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label):
+def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label):
     open_textbox.delete(0.0, "end")
     closed_textbox.delete(0.0, "end")
     misc_textbox.delete(0.0, "end")
@@ -66,14 +66,15 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, firs
             elif result in (110, 10060):
                 status = "FILTERED / TIMEOUT"
 
-                misc_textbox.insert("end", f"[?] Port {port} ... FILTERED / TIMEOUT | no reply\n")
+                filtered_textbox.insert("end", f"[?] Port {port} | FILTERED / TIMEOUT | no reply\n")
             
             elif result in (11, 10035):
                 status = "NO RESPONSE"
-                misc_textbox.insert("end", f"[?] Port {port} ... NO RESPONSE | no reply\n")
+                misc_textbox.insert("end", f"[?] Port {port} | NO RESPONSE | no reply\n")
+
             else:
                 status = "ERROR"
-                logs_textbox.insert("end", f"[!] Port {port} ... ERROR\n")
+                logs_textbox.insert("end", f"[!] Port {port} | ERROR\n")
             
             logs_textbox.insert("end", f"[>] Scanning: Port {port}\n")
             logs_textbox.see("end")
@@ -87,6 +88,3 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, firs
             percentage_label.configure(text = f"{int(progress * 100)}%")
         finally:
             s.close()
-
-
-

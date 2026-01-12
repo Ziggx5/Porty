@@ -4,7 +4,7 @@ import threading
 
 def start_ui():
     app = CTk()
-    app.geometry("1120x700")
+    app.geometry("1490x700")
     app.title("Porty")
     app.resizable(False, False)
     stop_event = threading.Event()
@@ -20,6 +20,9 @@ def start_ui():
 
     misc_frame = CTkFrame(app)
     misc_frame.place(x = 750, y = 100)
+
+    filtered_frame = CTkFrame(app)
+    filtered_frame.place(x = 1120, y = 100)
 
     address_input = CTkEntry(
         app,
@@ -70,7 +73,7 @@ def start_ui():
 
     misc_label = CTkLabel(
         misc_frame,
-        text = "Filtered / No response",
+        text = "No response",
         font = ("TkTextFont", 15),
         text_color = "white"
     )
@@ -87,6 +90,26 @@ def start_ui():
     )
     misc_textbox.grid(row = 1, column = 0, padx = 5, pady = 5)
 
+    filtered_label = CTkLabel(
+        filtered_frame,
+        text = "Filtered / timeout",
+        font = ("TkTextFont", 15),
+        text_color = "white"
+    )
+    filtered_label.grid(row = 0, column = 0, sticky = "w", padx = 5)
+
+    filtered_textbox = CTkTextbox(
+        filtered_frame,
+        font = ("TkTextFont", 15),
+        width = 350,
+        height = 250,
+        text_color = "#E5C07B",
+        padx = 5,
+        pady = 5
+    )
+    filtered_textbox.grid(row = 1, column = 0, padx = 5, pady = 5)
+
+
     logs_label = CTkLabel(
         logs_frame,
         text = "Logs",
@@ -100,7 +123,7 @@ def start_ui():
         logs_frame,
         font = ("TkTextFont", 15),
         text_color = "white",
-        width = 1090,
+        width = 1460,
         height = 250,
         padx = 5,
         pady = 5
@@ -113,7 +136,7 @@ def start_ui():
         font = ("TkTextFont", 15),
         text_color = "white"
     )
-    range_label.place(x = 855, y = 10)
+    range_label.place(x = 1225, y = 10)
 
     first_entry = CTkEntry(
         app,
@@ -122,7 +145,7 @@ def start_ui():
         text_color = "white",
         width = 70
     )
-    first_entry.place(x = 945, y = 10)
+    first_entry.place(x = 1315, y = 10)
 
     minus_label = CTkLabel(
         app,
@@ -130,7 +153,7 @@ def start_ui():
         font = ("TkTextFont", 15),
         text_color = "white"
     )
-    minus_label.place(x = 1025, y = 10)
+    minus_label.place(x = 1395, y = 10)
 
     second_entry = CTkEntry(
         app,
@@ -139,7 +162,7 @@ def start_ui():
         text_color = "white",
         width = 70
     )
-    second_entry.place(x = 1040, y = 10)
+    second_entry.place(x = 1410, y = 10)
 
     progress_bar = CTkProgressBar(
         app,
@@ -174,7 +197,7 @@ def start_ui():
         font = ("TkTextFont", 15),
         text_color = "white"
     )
-    scan_rate_label.place(x = 855, y = 50)
+    scan_rate_label.place(x = 1225, y = 50)
 
     rate_input = CTkEntry(
         app,
@@ -183,7 +206,7 @@ def start_ui():
         text_color = "white",
         width = 70
     )
-    rate_input.place(x = 945, y = 50)
+    rate_input.place(x = 1315, y = 50)
 
     second_label = CTkLabel(
         app,
@@ -191,7 +214,7 @@ def start_ui():
         font = ("TkTextFont", 15),
         text_color = "white"
     )
-    second_label.place(x = 1025, y = 50)
+    second_label.place(x = 1395, y = 50)
 
     scan_button = CTkButton(
         app,
@@ -200,7 +223,7 @@ def start_ui():
         hover_color = "#033e66",
         width = 100,
         height = 30,
-        command = lambda: start_scan(address_input.get(), logs_textbox, closed_textbox, open_textbox, misc_textbox, first_entry.get(), second_entry.get(), progress_bar, stop_event, rate_input.get(), percentage_label)
+        command = lambda: start_scan(address_input.get(), logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry.get(), second_entry.get(), progress_bar, stop_event, rate_input.get(), percentage_label)
     )
     scan_button.place(x = 220, y = 10)
 
