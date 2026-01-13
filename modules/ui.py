@@ -4,25 +4,25 @@ import threading
 
 def start_ui():
     app = CTk()
-    app.geometry("1490x700")
+    app.geometry("1490x750")
     app.title("Porty")
     app.resizable(False, False)
     stop_event = threading.Event()
 
     logs_frame = CTkFrame(app)
-    logs_frame.place(x = 10, y = 400)
+    logs_frame.place(x = 10, y = 450)
 
     closed_frame = CTkFrame(app)
-    closed_frame.place(x = 10, y = 100)
+    closed_frame.place(x = 10, y = 150)
 
     open_frame = CTkFrame(app)
-    open_frame.place(x = 380, y = 100)
+    open_frame.place(x = 380, y = 150)
 
     misc_frame = CTkFrame(app)
-    misc_frame.place(x = 750, y = 100)
+    misc_frame.place(x = 750, y = 150)
 
     filtered_frame = CTkFrame(app)
-    filtered_frame.place(x = 1120, y = 100)
+    filtered_frame.place(x = 1120, y = 150)
 
     address_input = CTkEntry(
         app,
@@ -31,7 +31,7 @@ def start_ui():
         text_color = "white",
         width = 200
     )
-    address_input.place(x=10, y=10)
+    address_input.place(x = 10, y = 10)
 
     closed_label = CTkLabel(
         closed_frame,
@@ -215,6 +215,16 @@ def start_ui():
     )
     second_label.place(x = 1395, y = 50)
 
+    banner_grab_check = CTkCheckBox(
+        app,
+        text = "Banner grab",
+        font = ("TkTextFont", 15),
+        text_color = "white",
+        fg_color = "#51c41f",
+        hover_color = "#265c0f"
+    )
+    banner_grab_check.place(x = 1225, y = 90)
+
     scan_button = CTkButton(
         app,
         text = "Scan",
@@ -236,7 +246,8 @@ def start_ui():
             rate_input.get(),
             percentage_label,
             stop_button,
-            scan_button
+            scan_button,
+            banner_grab_check.get()
             )
     )
     scan_button.place(x = 220, y = 10)

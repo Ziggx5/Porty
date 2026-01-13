@@ -3,12 +3,12 @@ import threading
 from modules.scan_rate import rate
 import time
 
-def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button):
+def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, banner_grab_check):
     stop_event.clear()
-    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button,))
+    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, banner_grab_check,))
     thread.start()
 
-def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button):
+def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, banner_grab_check):
     open_textbox.delete(0.0, "end")
     closed_textbox.delete(0.0, "end")
     misc_textbox.delete(0.0, "end")
@@ -52,17 +52,21 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
 
             if result == 0:
                 status = "OPEN"
+                decoded_banner = ""
                 try:
-                    banner = s.recv(1024)
-                    if banner:
-                        decoded_banner = banner.decode(errors = "ignore").strip()
+                    if banner_grab_check:
+                        banner = s.recv(1024)
+                        if banner:
+                            decoded_banner = banner.decode(errors = "ignore").strip()
                 except socket.timeout:
-                    decoded_banner = "(No banner)"
+                    decoded_banner = "banner: none"
                 except Exception as e:
                     decoded_banner = f"(Banner error: {e})"
 
-                open_textbox.insert("end", f"[+] Port {port} | OPEN | RTT {tcp_handshake_time}ms\n")
-
+                if decoded_banner == "":
+                    open_textbox.insert("end", f"[+] Port {port} | OPEN | RTT {tcp_handshake_time}ms\n")
+                else:
+                    open_textbox.insert("end", f"[+] Port {port} | OPEN | {decoded_banner} | RTT {tcp_handshake_time}ms\n")
             elif result in (111, 10061):
                 status = "CLOSED"
                 closed_textbox.insert("end", f"[-] Port {port} | CLOSED | RTT {tcp_handshake_time}ms\n")
@@ -92,3 +96,5 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
             percentage_label.configure(text = f"{int(progress * 100)}%")
         finally:
             s.close()
+
+    scan_button.configure(state = "normal", fg_color = "#0673bd", hover_color = "#033e66")
