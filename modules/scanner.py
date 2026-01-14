@@ -1,6 +1,7 @@
 import socket
 import threading
 from modules.scan_rate import rate
+from modules.probe import probe_service
 import time
 
 def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, banner_grab_check):
@@ -59,14 +60,24 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
                         if banner:
                             decoded_banner = banner.decode(errors = "ignore").strip()
                 except socket.timeout:
-                    decoded_banner = "banner: none"
-                except Exception as e:
-                    decoded_banner = f"(Banner error: {e})"
+                    pass
 
-                if decoded_banner == "":
-                    open_textbox.insert("end", f"[+] Port {port} | OPEN | RTT {tcp_handshake_time}ms\n")
+                if decoded_banner == "" and banner_grab_check:
+                    service, response = probe_service(s, port)
+                    if service:
+                        open_textbox.insert(
+                            "end",
+                            f"[+] Port {port} | OPEN | {service} service | RTT {tcp_handshake_time}ms\n",
+                            f"    ↳ {response}\n"
+                        )
+                    else:
+                        open_textbox.insert(
+                            "end",
+                            f"[+] Port {port} | OPEN | Unknown service | RTT {tcp_handshake_time}ms\n"
+                        )
                 else:
                     open_textbox.insert("end", f"[+] Port {port} | OPEN | {decoded_banner} | RTT {tcp_handshake_time}ms\n")
+
             elif result in (111, 10061):
                 status = "CLOSED"
                 closed_textbox.insert("end", f"[-] Port {port} | CLOSED | RTT {tcp_handshake_time}ms\n")
