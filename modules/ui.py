@@ -215,15 +215,15 @@ def start_ui():
     )
     second_label.place(x = 1395, y = 50)
 
-    banner_grab_check = CTkCheckBox(
+    service_detection_check = CTkCheckBox(
         app,
-        text = "Banner grab",
+        text = "Service detection",
         font = ("TkTextFont", 15),
         text_color = "white",
         fg_color = "#51c41f",
         hover_color = "#265c0f"
     )
-    banner_grab_check.place(x = 1225, y = 90)
+    service_detection_check.place(x = 1225, y = 90)
 
     scan_button = CTkButton(
         app,
@@ -247,7 +247,7 @@ def start_ui():
             percentage_label,
             stop_button,
             scan_button,
-            banner_grab_check.get()
+            service_detection_check.get()
             )
     )
     scan_button.place(x = 220, y = 10)

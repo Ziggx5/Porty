@@ -4,12 +4,12 @@ from modules.scan_rate import rate
 from modules.probe import probe_service
 import time
 
-def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, banner_grab_check):
+def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check):
     stop_event.clear()
-    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, banner_grab_check,))
+    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check,))
     thread.start()
 
-def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, banner_grab_check):
+def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check):
     open_textbox.delete(0.0, "end")
     closed_textbox.delete(0.0, "end")
     misc_textbox.delete(0.0, "end")
@@ -55,20 +55,19 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
                 status = "OPEN"
                 decoded_banner = ""
                 try:
-                    if banner_grab_check:
+                    if service_detection_check:
                         banner = s.recv(1024)
                         if banner:
                             decoded_banner = banner.decode(errors = "ignore").strip()
                 except socket.timeout:
                     pass
 
-                if decoded_banner == "" and banner_grab_check:
+                if decoded_banner == "" and service_detection_check:
                     service, response = probe_service(s, port)
+                    print(service, response)
                     if service:
                         open_textbox.insert(
-                            "end",
-                            f"[+] Port {port} | OPEN | {service} service | RTT {tcp_handshake_time}ms\n",
-                            f"    ↳ {response}\n"
+                            "end", f"[+] Port {port} | OPEN | {service} service | {response} | RTT {tcp_handshake_time}ms\n"
                         )
                     else:
                         open_textbox.insert(
