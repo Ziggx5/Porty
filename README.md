@@ -2,6 +2,8 @@ Porty 🔌
 
 Porty is a lightweight TCP port scanner written in Python. It supports fast and accurate port scanning with features such as banner grabbing, active service probing as a fallback and TCP RTT measurement.
 
+Webpage: https://ziggx5.github.io/Porty/
+
 ❗Disclaimer❗
 
 This software is provided for educational and research purposes only.
