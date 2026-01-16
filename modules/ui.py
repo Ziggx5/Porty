@@ -1,12 +1,20 @@
 from customtkinter import *
 from modules.scanner import scan, start_scan
 import threading
+import os
+from PIL import Image, ImageTk
 
 def start_ui():
+    root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    images_path = os.path.join(root, "images")
+    icon_path = os.path.join(images_path, "icon.png")
+    icon = Image.open(icon_path)
+    
     app = CTk()
     app.geometry("1490x750")
     app.title("Porty")
     app.resizable(False, False)
+    app.iconphoto(False, ImageTk.PhotoImage(icon))
     stop_event = threading.Event()
 
     logs_frame = CTkFrame(app)
