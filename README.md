@@ -1,6 +1,6 @@
 Porty 🔌
 
-Porty is a simple TCP port scanner written in Python using Sockets and CustomTkinter.
+Porty is a lightweight TCP port scanner written in Python. It supports fast and accurate port scanning with features such as banner grabbing, active service probing as a fallback and TCP RTT measurement.
 
 ❗Disclaimer❗
 
@@ -8,15 +8,17 @@ This software is provided for educational and research purposes only.
 Use it only on systems you own or have permission to test.
 The author is not responsible for any misuse or damage caused by this application.
 
-<img width="1055" height="858" alt="image" src="https://github.com/user-attachments/assets/cd79ccd9-12a6-4125-af1b-40556477ecb1" />
+<img width="1492" height="780" alt="screenshot" src="https://github.com/user-attachments/assets/443eba7d-e63e-4e8f-8c5e-dd459682610c" />
 
 ---
 ✨ Features
-- TCP based scanning
-- Port sorting (open, closed, filtered/timeout, no response)
+- TCP port scanning
+- Service detection (Passive banner grabbing + active service probing)
 - Real-time scan logs
 - Simple graphical interface
-- Adjustable port scan range and scan rate
+- TCP RTT (round-trip time) measurement
+- Open / Closed / No response / Filtered classification
+- Adjustable scan rate
 ---
 
 🚀 Installation
@@ -37,9 +39,9 @@ Linux:
 - Download latest `.AppImage`
 - Make it executable and run:
 
-  `chmod +x Porty-x86_64.AppImage`
+  `chmod +x Porty_2.0.0-x86_64.AppImage`
 
-  `./Porty-x86_64.AppImage`
+  `./Porty_2.0.0-x86_64.AppImage`
 
 
 
