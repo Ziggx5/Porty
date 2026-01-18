@@ -16,7 +16,7 @@ def start_ui():
 
     if sys.platform.startswith("win"):    
         icon_path = os.path.join(images_path, "icon.ico")
-        app.iconbitmap(icon)
+        app.iconbitmap(icon_path)
     else:
         icon_path = os.path.join(images_path, "icon.png")
         icon = Image.open(icon_path)
