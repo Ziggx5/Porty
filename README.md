@@ -10,7 +10,7 @@ This software is provided for educational and research purposes only.
 Use it only on systems you own or have permission to test.
 The author is not responsible for any misuse or damage caused by this application.
 
-<img width="1492" height="780" alt="screenshot" src="https://github.com/user-attachments/assets/443eba7d-e63e-4e8f-8c5e-dd459682610c" />
+<img width="1620" height="908" alt="image" src="https://github.com/user-attachments/assets/327c8fa0-d789-418a-a2c2-c9d09dd608bd" />
 
 ---
 ✨ Features
