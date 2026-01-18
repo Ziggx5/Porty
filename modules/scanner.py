@@ -33,7 +33,7 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
     scanned_ports = 0
     stop_button.configure(state = "normal", fg_color = "#fc2d2d", hover_color = "#7d1515")
     scan_button.configure(state = "disabled", fg_color = "#04314f")
-
+    start_scan_time = time.time()
     for port in range(first, second + 1):
         if stop_event.is_set():
             stop_button.configure(state = "disabled", fg_color = "#751414")
@@ -106,5 +106,8 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
             percentage_label.configure(text = f"{int(progress * 100)}%")
         finally:
             s.close()
-
+    stop_scan_time = time.time()
+    calculated_scan_time = round(stop_scan_time - start_scan_time, 2)
+    logs_textbox.insert("end", f"[✓] Scan successful\n [i] Duration: {calculated_scan_time}s")
+    logs_textbox.see("end")
     scan_button.configure(state = "normal", fg_color = "#0673bd", hover_color = "#033e66")
