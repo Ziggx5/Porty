@@ -39,14 +39,44 @@ def start_ui():
     filtered_frame = CTkFrame(app)
     filtered_frame.place(x = 1120, y = 150)
 
+    target_ip_label = CTkLabel(
+        app,
+        text = "Target address:",
+        font = ("TkTextFont", 15),
+        text_color = "white"
+    )
+    target_ip_label.place(x = 10, y = 10)
+
     address_input = CTkEntry(
         app,
-        placeholder_text = "Target IP",
         font = ("TkTextFont", 15),
         text_color = "white",
+        width = 170
+    )
+    address_input.place(x = 130, y = 10)
+
+    profiles_label = CTkLabel(
+        app,
+        text = "Profile:",
+        font = ("TkTextFont", 15),
+        text_color = "white"
+    )
+    profiles_label.place(x = 10, y = 50)
+
+    profiles_optionmenu = CTkOptionMenu(
+        app,
+        values = ["Quick scan", "Full TCP scan", "Aggressive / Detect", "Custom"],
+        fg_color = "#6b6b6b",
+        button_color = "#6b6b6b",
+        button_hover_color = "#545353",
+        dropdown_hover_color = "#545353",
+        text_color = "white",
+        font = ("TkTextFont", 15),
+        dropdown_font = ("TkTextFont", 15),
+        dropdown_text_color = "white",
         width = 200
     )
-    address_input.place(x = 10, y = 10)
+    profiles_optionmenu.place(x = 70, y = 50)
 
     closed_label = CTkLabel(
         closed_frame,
@@ -183,7 +213,7 @@ def start_ui():
         width = 310,
         progress_color = "green"
     )
-    progress_bar.place(x = 10, y = 60)
+    progress_bar.place(x = 10, y = 110)
     progress_bar.set(0)
 
     percentage_label = CTkLabel(
@@ -192,7 +222,7 @@ def start_ui():
         font = ("TkTextFont", 15),
         text_color = "white"
     )
-    percentage_label.place(x = 330, y = 50)
+    percentage_label.place(x = 330, y = 100)
 
     stop_button = CTkButton(
         app,
@@ -203,7 +233,7 @@ def start_ui():
         state = "disabled",
         command = lambda: stop_event.set()
     )
-    stop_button.place(x = 330, y = 10)
+    stop_button.place(x = 420, y = 10)
 
     scan_rate_label = CTkLabel(
         app,
@@ -265,6 +295,6 @@ def start_ui():
             service_detection_check.get()
             )
     )
-    scan_button.place(x = 220, y = 10)
+    scan_button.place(x = 310, y = 10)
 
     app.mainloop()
