@@ -2,14 +2,15 @@ import socket
 import threading
 from modules.scan_rate import rate
 from modules.probe import probe_service
+from modules.profiles_handler import profile_checker
 import time
 
-def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check):
+def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu):
     stop_event.clear()
-    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check,))
+    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu,))
     thread.start()
 
-def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check):
+def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu):
     open_textbox.delete(0.0, "end")
     closed_textbox.delete(0.0, "end")
     misc_textbox.delete(0.0, "end")
@@ -22,8 +23,9 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
         logs_textbox.insert("end", f"[!] Invalid IP or hostname: {address}\n")
         return
 
-    first = int(first_entry)
-    second = int(second_entry)
+    profile_check_first_entry, profile_check_second_entry, profile_check_rate = profile_checker(optionmenu, first_entry, second_entry, rate_input)
+    first = int(profile_check_first_entry)
+    second = int(profile_check_second_entry)
 
     if first < 1 or second > 65535 or first > second:
         logs_textbox.insert("end", "[!] Invalid port range\n")
@@ -41,7 +43,7 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
             logs_textbox.insert("end", "[!] Scan stopped by user\n")
             break
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(rate(rate_input))
+        s.settimeout(rate(profile_check_rate))
 
         try:
             start_time = time.perf_counter()

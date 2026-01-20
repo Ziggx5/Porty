@@ -292,7 +292,8 @@ def start_ui():
             percentage_label,
             stop_button,
             scan_button,
-            service_detection_check.get()
+            service_detection_check.get(),
+            profiles_optionmenu.get()
             )
     )
     scan_button.place(x = 310, y = 10)
