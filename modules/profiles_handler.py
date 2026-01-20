@@ -15,9 +15,11 @@ def profile_checker(profile, first, second, rate_input):
         profile_check_rate = 0.1
     
     elif profile == "Custom":
-        profile_check_first_entry = first
-        profile_check_second_entry = second
-        profile_check_rate = rate_input
+        try:
+            profile_check_first_entry = int(first)
+            profile_check_second_entry = int(second)
+            profile_check_rate = float(rate_input)
+        except (ValueError, TypeError):
+            return None, None, None
 
     return profile_check_first_entry, profile_check_second_entry, profile_check_rate
-
