@@ -50,7 +50,7 @@ Linux:
 
 This project is licensed under the GPL-3.0 License.
 
-Copyright © 2026 Ziggx5
+Copyright © 2025 Ziggx5
 
 👤 Author
 
