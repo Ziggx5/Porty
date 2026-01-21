@@ -8,11 +8,12 @@ This software is provided for educational and research purposes only.
 Use it only on systems you own or have permission to test.
 The author is not responsible for any misuse or damage caused by this application.
 
-<img width="1620" height="908" alt="image" src="https://github.com/user-attachments/assets/327c8fa0-d789-418a-a2c2-c9d09dd608bd" />
+<img width="1488" height="777" alt="image" src="https://github.com/user-attachments/assets/f327599e-940a-462f-b7dd-af6640caeae6" />
 
 ---
 ✨ Features
 - TCP port scanning
+- Scan profiles
 - Service detection (Passive banner grabbing + active service probing)
 - Real-time scan logs
 - Simple graphical interface
@@ -39,9 +40,9 @@ Linux:
 - Download latest `.AppImage`
 - Make it executable and run:
 
-  `chmod +x Porty_2.0.0-x86_64.AppImage`
+  `chmod +x Porty_2.2.0-x86_64.AppImage`
 
-  `./Porty_2.0.0-x86_64.AppImage`
+  `./Porty_2.2.0-x86_64.AppImage`
 
 
 
@@ -49,7 +50,7 @@ Linux:
 
 This project is licensed under the GPL-3.0 License.
 
-Copyright © 2025 Ziggx5
+Copyright © 2026 Ziggx5
 
 👤 Author
 
