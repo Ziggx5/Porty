@@ -17,10 +17,8 @@ def probe_service(s, port):
     try:
         s.sendall(payload)
         response = s.recv(1024)
-        print(response)
         if response:
             text = response.decode(errors="ignore").strip()
-            print(text)
             return "Guessed", text
     except TimeoutError:
         pass

@@ -66,7 +66,6 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
 
                 if decoded_banner == "" and profile_check_service:
                     service, response = probe_service(s, port)
-                    print(service, response)
                     if service:
                         open_textbox.insert(
                             "end", f"[+] Port {port} | OPEN | {service} service | {response} | RTT {tcp_handshake_time}ms\n"
