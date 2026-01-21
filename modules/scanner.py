@@ -76,7 +76,10 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
                             f"[+] Port {port} | OPEN | Unknown service | RTT {tcp_handshake_time}ms\n"
                         )
                 else:
-                    open_textbox.insert("end", f"[+] Port {port} | OPEN | {decoded_banner} | RTT {tcp_handshake_time}ms\n")
+                    if decoded_banner == "":
+                        open_textbox.insert("end", f"[+] Port {port} | OPEN | RTT {tcp_handshake_time}ms\n")
+                    else:
+                        open_textbox.insert("end", f"[+] Port {port} | OPEN | {decoded_banner} | RTT {tcp_handshake_time}ms\n")
 
             elif result in (111, 10061):
                 status = "CLOSED"
