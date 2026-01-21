@@ -1,5 +1,6 @@
 from customtkinter import *
 from modules.scanner import scan, start_scan
+from modules.profiles_handler import advanced_settings_refresh
 import threading
 import os
 from PIL import Image, ImageTk
@@ -74,7 +75,8 @@ def start_ui():
         font = ("TkTextFont", 15),
         dropdown_font = ("TkTextFont", 15),
         dropdown_text_color = "white",
-        width = 200
+        width = 200,
+        command = lambda value: advanced_settings_refresh(value, first_entry, second_entry, rate_input, range_label, minus_label, scan_rate_label, second_label, service_detection_check)
     )
     profiles_optionmenu.place(x = 70, y = 50)
 
@@ -178,15 +180,15 @@ def start_ui():
         app,
         text = "Port range:",
         font = ("TkTextFont", 15),
-        text_color = "white"
+        text_color = "#6b7070"
     )
     range_label.place(x = 1225, y = 10)
 
     first_entry = CTkEntry(
         app,
-        placeholder_text = "1",
         font = ("TkTextFont", 15),
         text_color = "white",
+        state = "disabled",
         width = 70
     )
     first_entry.place(x = 1315, y = 10)
@@ -195,15 +197,15 @@ def start_ui():
         app,
         text = "-",
         font = ("TkTextFont", 15),
-        text_color = "white"
+        text_color = "#6b7070"
     )
     minus_label.place(x = 1395, y = 10)
 
     second_entry = CTkEntry(
         app,
-        placeholder_text = "65535",
         font = ("TkTextFont", 15),
         text_color = "white",
+        state = "disabled",
         width = 70
     )
     second_entry.place(x = 1410, y = 10)
@@ -239,15 +241,15 @@ def start_ui():
         app,
         text = "Scan rate:",
         font = ("TkTextFont", 15),
-        text_color = "white"
+        text_color = "#6b7070"
     )
     scan_rate_label.place(x = 1225, y = 50)
 
     rate_input = CTkEntry(
         app,
-        placeholder_text = "0.1",
         font = ("TkTextFont", 15),
         text_color = "white",
+        state = "disabled",
         width = 70
     )
     rate_input.place(x = 1315, y = 50)
@@ -256,7 +258,7 @@ def start_ui():
         app,
         text = "s",
         font = ("TkTextFont", 15),
-        text_color = "white"
+        text_color = "#6b7070"
     )
     second_label.place(x = 1395, y = 50)
 
@@ -266,6 +268,7 @@ def start_ui():
         font = ("TkTextFont", 15),
         text_color = "white",
         fg_color = "#51c41f",
+        state = "disabled",
         hover_color = "#265c0f"
     )
     service_detection_check.place(x = 1225, y = 90)
@@ -297,5 +300,6 @@ def start_ui():
             )
     )
     scan_button.place(x = 310, y = 10)
-
+    
+    advanced_settings_refresh(profiles_optionmenu.get(), first_entry, second_entry, rate_input, range_label, minus_label, scan_rate_label, second_label, service_detection_check)
     app.mainloop()

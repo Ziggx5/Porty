@@ -23,7 +23,7 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
         logs_textbox.insert("end", f"[!] Invalid IP or hostname: {address}\n")
         return
 
-    profile_check_first_entry, profile_check_second_entry, profile_check_rate = profile_checker(optionmenu, first_entry, second_entry, rate_input)
+    profile_check_first_entry, profile_check_second_entry, profile_check_rate, profile_check_service = profile_checker(optionmenu, first_entry, second_entry, rate_input, service_detection_check)
     first = int(profile_check_first_entry)
     second = int(profile_check_second_entry)
 
@@ -57,14 +57,14 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
                 status = "OPEN"
                 decoded_banner = ""
                 try:
-                    if service_detection_check:
+                    if profile_check_service:
                         banner = s.recv(1024)
                         if banner:
                             decoded_banner = banner.decode(errors = "ignore").strip()
                 except socket.timeout:
                     pass
 
-                if decoded_banner == "" and service_detection_check:
+                if decoded_banner == "" and profile_check_service:
                     service, response = probe_service(s, port)
                     print(service, response)
                     if service:
