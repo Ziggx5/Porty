@@ -266,6 +266,17 @@ def start_ui():
     )
     service_detection_check.place(x = 1225, y = 90)
 
+    export_button = CTkButton(
+        app,
+        text = "Export",
+        fg_color = "#6e6e6e",
+        hover_color = "#4a4a4a",
+        state = "disabled",
+        width = 100,
+        height = 30
+    )
+    export_button.place(x = 280, y = 50)
+
     scan_button = CTkButton(
         app,
         text = "Scan",
@@ -289,7 +300,8 @@ def start_ui():
             stop_button,
             scan_button,
             service_detection_check.get(),
-            profiles_optionmenu.get()
+            profiles_optionmenu.get(),
+            export_button
             )
     )
     scan_button.place(x = 220, y = 10)

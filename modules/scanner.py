@@ -5,16 +5,18 @@ from modules.probe import probe_service
 from modules.profiles_handler import profile_checker
 import time
 
-def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu):
+def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu, export_button):
     stop_event.clear()
-    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu,))
+    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu, export_button,))
     thread.start()
 
-def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu):
+def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu, export_button):
     open_textbox.delete(0.0, "end")
     closed_textbox.delete(0.0, "end")
     misc_textbox.delete(0.0, "end")
     logs_textbox.delete(0.0, "end")
+    open_ports = []
+    closed_ports = []
     
     try:
         resolved_ip = socket.gethostbyname(address)
@@ -35,6 +37,7 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
     scanned_ports = 0
     stop_button.configure(state = "normal", fg_color = "#fc2d2d", hover_color = "#7d1515")
     scan_button.configure(state = "disabled", fg_color = "#04314f")
+    export_button.configure(state = "disabled", fg_color = "#3b3b3b")
     start_scan_time = time.time()
     for port in range(first, second + 1):
         if stop_event.is_set():
@@ -81,10 +84,14 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
                         open_textbox.insert("end", f"[+] Port {port} | OPEN | RTT {tcp_handshake_time}ms\n")
                     else:
                         open_textbox.insert("end", f"[+] Port {port} | OPEN | {decoded_banner} | RTT {tcp_handshake_time}ms\n")
+                open_ports.append((port, tcp_handshake_time))
+                print(open_ports)
 
             elif result in (111, 10061):
                 status = "CLOSED"
                 closed_textbox.insert("end", f"[-] Port {port} | CLOSED | RTT {tcp_handshake_time}ms\n")
+                closed_ports.append((port, tcp_handshake_time))
+                print(closed_ports)
 
             elif result in (110, 10060):
                 status = "FILTERED / TIMEOUT"
@@ -116,3 +123,4 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
     logs_textbox.insert("end", f"[✓] Scan successful\n [i] Duration: {calculated_scan_time}s")
     logs_textbox.see("end")
     scan_button.configure(state = "normal", fg_color = "#0673bd", hover_color = "#033e66")
+    export_button.configure(state = "normal", fg_color = "#6e6e6e", hover_color = "#4a4a4a")
