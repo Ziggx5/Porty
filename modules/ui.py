@@ -40,21 +40,14 @@ def start_ui():
     filtered_frame = CTkFrame(app)
     filtered_frame.place(x = 1120, y = 150)
 
-    target_ip_label = CTkLabel(
-        app,
-        text = "Target address:",
-        font = ("TkTextFont", 15),
-        text_color = "white"
-    )
-    target_ip_label.place(x = 10, y = 10)
-
     address_input = CTkEntry(
         app,
         font = ("TkTextFont", 15),
+        placeholder_text = "Target address",
         text_color = "white",
-        width = 170
+        width = 200
     )
-    address_input.place(x = 130, y = 10)
+    address_input.place(x = 10, y = 10)
 
     profiles_label = CTkLabel(
         app,
@@ -235,7 +228,7 @@ def start_ui():
         state = "disabled",
         command = lambda: stop_event.set()
     )
-    stop_button.place(x = 420, y = 10)
+    stop_button.place(x = 330, y = 10)
 
     scan_rate_label = CTkLabel(
         app,
@@ -299,7 +292,7 @@ def start_ui():
             profiles_optionmenu.get()
             )
     )
-    scan_button.place(x = 310, y = 10)
+    scan_button.place(x = 220, y = 10)
     
     advanced_settings_refresh(profiles_optionmenu.get(), first_entry, second_entry, rate_input, range_label, minus_label, scan_rate_label, second_label, service_detection_check)
     app.mainloop()

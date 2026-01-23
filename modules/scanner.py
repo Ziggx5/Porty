@@ -42,6 +42,7 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
             scan_button.configure(state = "normal", fg_color = "#0673bd", hover_color = "#033e66")
             logs_textbox.insert("end", "[!] Scan stopped by user\n")
             break
+        
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(rate(profile_check_rate))
 
