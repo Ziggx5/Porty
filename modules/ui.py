@@ -1,6 +1,7 @@
 from customtkinter import *
 from modules.scanner import scan, start_scan
 from modules.profiles_handler import advanced_settings_refresh
+from modules.export import export_results
 import threading
 import os
 from PIL import Image, ImageTk
@@ -22,6 +23,11 @@ def start_ui():
         icon_path = os.path.join(images_path, "icon.png")
         icon = Image.open(icon_path)
         app.iconphoto(False, ImageTk.PhotoImage(icon))
+
+    scan_results = {
+        "open": [],
+        "closed": []
+    }
 
     stop_event = threading.Event()
 
@@ -273,7 +279,8 @@ def start_ui():
         hover_color = "#4a4a4a",
         state = "disabled",
         width = 100,
-        height = 30
+        height = 30,
+        command = lambda: export_results(scan_results["open"], scan_results["closed"])
     )
     export_button.place(x = 280, y = 50)
 
@@ -301,7 +308,8 @@ def start_ui():
             scan_button,
             service_detection_check.get(),
             profiles_optionmenu.get(),
-            export_button
+            export_button,
+            scan_results
             )
     )
     scan_button.place(x = 220, y = 10)

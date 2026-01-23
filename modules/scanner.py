@@ -6,12 +6,12 @@ from modules.profiles_handler import profile_checker
 from modules.export import export_results
 import time
 
-def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu, export_button):
+def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu, export_button, scan_results):
     stop_event.clear()
-    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu, export_button,))
+    thread = threading.Thread(target = scan, args = (address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu, export_button, scan_results,))
     thread.start()
 
-def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu, export_button):
+def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu, export_button, scan_results):
     open_textbox.delete(0.0, "end")
     closed_textbox.delete(0.0, "end")
     misc_textbox.delete(0.0, "end")
@@ -123,4 +123,5 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
     logs_textbox.see("end")
     scan_button.configure(state = "normal", fg_color = "#0673bd", hover_color = "#033e66")
     export_button.configure(state = "normal", fg_color = "#6e6e6e", hover_color = "#4a4a4a")
-    export_results(open_ports, closed_ports)
+    scan_results["open"] = open_ports
+    scan_results["closed"] = closed_ports
