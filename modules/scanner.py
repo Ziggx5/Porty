@@ -3,6 +3,7 @@ import threading
 from modules.scan_rate import rate
 from modules.probe import probe_service
 from modules.profiles_handler import profile_checker
+from modules.export import export_results
 import time
 
 def start_scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filtered_textbox, first_entry, second_entry, progress_bar, stop_event, rate_input, percentage_label, stop_button, scan_button, service_detection_check, optionmenu, export_button):
@@ -85,13 +86,11 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
                     else:
                         open_textbox.insert("end", f"[+] Port {port} | OPEN | {decoded_banner} | RTT {tcp_handshake_time}ms\n")
                 open_ports.append((port, tcp_handshake_time))
-                print(open_ports)
 
             elif result in (111, 10061):
                 status = "CLOSED"
                 closed_textbox.insert("end", f"[-] Port {port} | CLOSED | RTT {tcp_handshake_time}ms\n")
                 closed_ports.append((port, tcp_handshake_time))
-                print(closed_ports)
 
             elif result in (110, 10060):
                 status = "FILTERED / TIMEOUT"
@@ -124,3 +123,4 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
     logs_textbox.see("end")
     scan_button.configure(state = "normal", fg_color = "#0673bd", hover_color = "#033e66")
     export_button.configure(state = "normal", fg_color = "#6e6e6e", hover_color = "#4a4a4a")
+    export_results(open_ports, closed_ports)
