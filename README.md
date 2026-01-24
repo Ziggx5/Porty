@@ -8,12 +8,13 @@ This software is provided for educational and research purposes only.
 Use it only on systems you own or have permission to test.
 The author is not responsible for any misuse or damage caused by this application.
 
-<img width="1488" height="777" alt="image" src="https://github.com/user-attachments/assets/f327599e-940a-462f-b7dd-af6640caeae6" />
+<img width="1491" height="779" alt="image" src="https://github.com/user-attachments/assets/d68d5b1b-2ed0-4034-8e2c-75263b587d09" />
 
 ---
 ✨ Features
 - TCP port scanning
 - Scan profiles
+- .txt exporting
 - Service detection (Passive banner grabbing + active service probing)
 - Real-time scan logs
 - Simple graphical interface
@@ -28,7 +29,7 @@ Windows:
 - Go to Releases
 - Download the latest `.zip`
 - Extract it anywhere you like
-- Run the application (`porty.exe`)
+- Run the application (`Porty.exe`)
 
 Note:
 
@@ -40,9 +41,9 @@ Linux:
 - Download latest `.AppImage`
 - Make it executable and run:
 
-  `chmod +x Porty_2.2.0-x86_64.AppImage`
+  `chmod +x Porty_{version}-x86_64.AppImage`
 
-  `./Porty_2.2.0-x86_64.AppImage`
+  `./Porty_{version}-x86_64.AppImage`
 
 
 
