@@ -59,8 +59,8 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
             tcp_handshake_time = int(calculated_time * 1000)
 
             if result == 0:
-                status = "OPEN"
                 decoded_banner = ""
+                response = ""
                 try:
                     if profile_check_service:
                         banner = s.recv(1024)
@@ -85,24 +85,20 @@ def scan(address, logs_textbox, closed_textbox, open_textbox, misc_textbox, filt
                         open_textbox.insert("end", f"[+] Port {port} | OPEN | RTT {tcp_handshake_time}ms\n")
                     else:
                         open_textbox.insert("end", f"[+] Port {port} | OPEN | {decoded_banner} | RTT {tcp_handshake_time}ms\n")
-                open_ports.append((port, tcp_handshake_time))
+                open_ports.append((port, tcp_handshake_time, decoded_banner, response))
 
             elif result in (111, 10061):
-                status = "CLOSED"
                 closed_textbox.insert("end", f"[-] Port {port} | CLOSED | RTT {tcp_handshake_time}ms\n")
                 closed_ports.append((port, tcp_handshake_time))
 
             elif result in (110, 10060):
-                status = "FILTERED / TIMEOUT"
 
                 filtered_textbox.insert("end", f"[?] Port {port} | FILTERED / TIMEOUT | no reply\n")
             
             elif result in (11, 10035):
-                status = "NO RESPONSE"
                 misc_textbox.insert("end", f"[?] Port {port} | NO RESPONSE | no reply\n")
 
             else:
-                status = "ERROR"
                 logs_textbox.insert("end", f"[!] Port {port} | ERROR\n")
             
             logs_textbox.insert("end", f"[>] Scanning: Port {port}\n")
