@@ -11,7 +11,6 @@ def export_results(open_ports, closed_ports):
     if not file_path:
         return
     
-    print(open_ports, closed_ports)
     with open(file_path, "w", encoding = "utf-8") as f:
         f.write("PORT SCAN RESULTS\n")
         f.write("=" * 40 + "\n")

@@ -12,6 +12,7 @@ def start_ui():
     app.geometry("1490x750")
     app.title("Porty")
     app.resizable(False, False)
+    app.configure(fg_color = "#1f1f1f")
 
     root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     images_path = os.path.join(root, "images")
@@ -31,19 +32,34 @@ def start_ui():
 
     stop_event = threading.Event()
 
-    logs_frame = CTkFrame(app)
+    logs_frame = CTkFrame(
+        app,
+        fg_color = "#292929"
+    )
     logs_frame.place(x = 10, y = 450)
 
-    closed_frame = CTkFrame(app)
+    closed_frame = CTkFrame(
+        app,
+        fg_color = "#292929"
+    )
     closed_frame.place(x = 10, y = 150)
 
-    open_frame = CTkFrame(app)
+    open_frame = CTkFrame(
+        app,
+        fg_color = "#292929"
+    )
     open_frame.place(x = 380, y = 150)
 
-    misc_frame = CTkFrame(app)
+    misc_frame = CTkFrame(
+        app,
+        fg_color = "#292929"
+    )
     misc_frame.place(x = 750, y = 150)
 
-    filtered_frame = CTkFrame(app)
+    filtered_frame = CTkFrame(
+        app,
+        fg_color = "#292929"
+    )
     filtered_frame.place(x = 1120, y = 150)
 
     address_input = CTkEntry(
@@ -51,6 +67,7 @@ def start_ui():
         font = ("TkTextFont", 15),
         placeholder_text = "Target address",
         text_color = "white",
+        fg_color = "#545454",
         width = 200
     )
     address_input.place(x = 10, y = 10)
@@ -93,6 +110,7 @@ def start_ui():
         width = 350,
         height = 250,
         text_color = "#E06C75",
+        fg_color = "#1f1f1f",
         padx = 5,
         pady = 5
     )
@@ -112,6 +130,7 @@ def start_ui():
         width = 350,
         height = 250,
         text_color = "#98C379",
+        fg_color = "#1f1f1f",
         padx = 5,
         pady = 5
     )
@@ -131,6 +150,7 @@ def start_ui():
         width = 350,
         height = 250,
         text_color = "#E5C07B",
+        fg_color = "#1f1f1f",
         padx = 5,
         pady = 5
     )
@@ -150,6 +170,7 @@ def start_ui():
         width = 350,
         height = 250,
         text_color = "#E5C07B",
+        fg_color = "#1f1f1f",
         padx = 5,
         pady = 5
     )
@@ -168,6 +189,7 @@ def start_ui():
         logs_frame,
         font = ("TkTextFont", 15),
         text_color = "white",
+        fg_color = "#1f1f1f",
         width = 1460,
         height = 250,
         padx = 5,
@@ -188,6 +210,7 @@ def start_ui():
         font = ("TkTextFont", 15),
         text_color = "white",
         state = "disabled",
+        fg_color = "#545454",
         width = 70
     )
     first_entry.place(x = 1315, y = 10)
@@ -205,6 +228,7 @@ def start_ui():
         font = ("TkTextFont", 15),
         text_color = "white",
         state = "disabled",
+        fg_color = "#545454",
         width = 70
     )
     second_entry.place(x = 1410, y = 10)
@@ -248,6 +272,7 @@ def start_ui():
         app,
         font = ("TkTextFont", 15),
         text_color = "white",
+        fg_color = "#545454",
         state = "disabled",
         width = 70
     )
